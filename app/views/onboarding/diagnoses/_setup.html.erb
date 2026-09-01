@@ -1,30 +1,83 @@
 <% content_for :section, "Diagnóstico" %>
-<%= render "shared/progress_bar", label: "Passo 3 de 3", percentage: 66 %>
+<%= render "shared/progress_bar", label: "Passo 3 de 3", percentage: 100 %>
 
-<h2 class="font-display text-headline-md">Como é o seu skate hoje?</h2>
-<p class="mt-xs text-body-md text-on-surface-variant">
-  Isso ajuda a entender se o seu equipamento atual atende às suas necessidades
-  ou se precisamos focar em setup.
-</p>
+<div class="flex flex-col w-full max-w-[480px] mx-auto gap-4 mt-2">
+  <div class="relative">
+    <h1 class="font-display text-[30px] sm:text-[34px] font-black uppercase text-[#e3e2e6] leading-tight tracking-tight">
+      Como é o seu <span class="text-[#ffb800]">skate hoje?</span>
+    </h1>
+    <div class="absolute -top-3 right-0 bg-[#fd591e] text-black font-body text-[10px] font-black uppercase px-2 py-0.5 rotate-3 shadow-[1px_1px_0_#121316] border border-black z-10" style="clip-path: polygon(2% 0%, 98% 3%, 100% 95%, 0% 100%);">
+      Equipamento
+    </div>
+  </div>
 
-<%= form_with model: @diagnosis, url: onboarding_diagnosis_path(step: "setup"), method: :patch, class: "mt-md space-y-xs" do |f| %>
-  <% {
-       "no_board"        => "Não tenho skate ainda",
-       "store_board"     => "Skate de loja comum",
-       "skateshop_board" => "Montado em skateshop",
-       "other_board"     => "Outro (longboard, cruiser)"
-     }.each do |value, label| %>
-    <label class="card flex cursor-pointer items-center justify-between gap-sm has-[:checked]:border-primary">
-      <span class="flex items-center gap-sm">
-        <%= f.radio_button :setup, value, class: "accent-[#ffb800]", required: true,
-              checked: @diagnosis.setup == value %>
-        <span class="text-body-md text-on-surface"><%= label %></span>
-      </span>
-      <span class="material-symbols-outlined text-on-surface-variant/40">check_circle</span>
+  <p class="font-body text-[13px] text-[#d5c4ab] leading-snug">
+    Isso ajuda a entender se o seu equipamento aguenta o tranco ou se precisamos te salvar de um skate travado.
+  </p>
+
+  <%= form_with model: @diagnosis, url: onboarding_diagnosis_path(step: "setup"), method: :patch, class: "flex flex-col gap-3" do |f| %>
+    <!-- Option 1 -->
+    <label class="relative group cursor-pointer w-full flex items-center justify-between p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded bg-[#121316] border border-[#343538] flex items-center justify-center text-[#ffb800] shrink-0">
+          <span class="material-symbols-outlined text-[24px]">shopping_cart</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-body text-[15px] font-bold text-[#e3e2e6]">Não tenho skate ainda</span>
+          <span class="font-body text-[12px] text-[#d5c4ab]">Quero começar com o equipamento certo</span>
+        </div>
+      </div>
+      <%= f.radio_button :setup, "no_board", class: "accent-[#ffb800] w-4 h-4 ml-2", required: true, checked: @diagnosis.setup == "no_board" %>
     </label>
-  <% end %>
 
-  <%= f.button type: :submit, class: "btn-primary mt-md" do %>
-    Ver meu plano personalizado <span class="material-symbols-outlined">arrow_forward</span>
+    <!-- Option 2 -->
+    <label class="relative group cursor-pointer w-full flex items-center justify-between p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded bg-[#121316] border border-[#343538] flex items-center justify-center text-[#ffb800] shrink-0">
+          <span class="material-symbols-outlined text-[24px]">skateboarding</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-body text-[15px] font-bold text-[#e3e2e6]">Skate montado comum</span>
+          <span class="font-body text-[12px] text-[#d5c4ab]">Comprado em loja de departamento / brinquedo</span>
+        </div>
+      </div>
+      <%= f.radio_button :setup, "store_board", class: "accent-[#ffb800] w-4 h-4 ml-2", required: true, checked: @diagnosis.setup == "store_board" %>
+    </label>
+
+    <!-- Option 3 -->
+    <label class="relative group cursor-pointer w-full flex items-center justify-between p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded bg-[#121316] border border-[#343538] flex items-center justify-center text-[#ffb800] shrink-0">
+          <span class="material-symbols-outlined text-[24px]">build</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-body text-[15px] font-bold text-[#e3e2e6]">Skate de skateshop profissional</span>
+          <span class="font-body text-[12px] text-[#d5c4ab]">Peças montadas sob medida para rolê sério</span>
+        </div>
+      </div>
+      <%= f.radio_button :setup, "skateshop_board", class: "accent-[#ffb800] w-4 h-4 ml-2", required: true, checked: (@diagnosis.setup == "skateshop_board" || @diagnosis.setup.blank?) %>
+    </label>
+
+    <!-- Option 4 -->
+    <label class="relative group cursor-pointer w-full flex items-center justify-between p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded bg-[#121316] border border-[#343538] flex items-center justify-center text-[#ffb800] shrink-0">
+          <span class="material-symbols-outlined text-[24px]">waves</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-body text-[15px] font-bold text-[#e3e2e6]">Outro tipo de prancha</span>
+          <span class="font-body text-[12px] text-[#d5c4ab]">Longboard, Surfskate ou Cruiser</span>
+        </div>
+      </div>
+      <%= f.radio_button :setup, "other_board", class: "accent-[#ffb800] w-4 h-4 ml-2", required: true, checked: @diagnosis.setup == "other_board" %>
+    </label>
+
+    <!-- High-Contrast Mechanical Button -->
+    <div class="mt-4 pt-2">
+      <%= f.button type: :submit, class: "w-full group relative bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_4px_0_#6b4c00] active:translate-y-[3px] active:shadow-none transition-all duration-75 ease-out flex items-center justify-center gap-2 cursor-pointer" do %>
+        <span>Ver meu plano personalizado</span>
+        <span class="material-symbols-outlined text-[24px] font-bold">arrow_forward</span>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>

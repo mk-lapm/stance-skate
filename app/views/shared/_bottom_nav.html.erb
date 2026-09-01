@@ -1,0 +1,37 @@
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-[#121316]/95 backdrop-blur-xl border-t border-[#343538] pb-safe shadow-[0_-4px_16px_rgba(0,0,0,0.4)]">
+  <div class="mx-auto flex h-16 max-w-[480px] items-center justify-around px-2">
+    <!-- 1. Trilha de Aprendizado (Ícone de Skate) -->
+    <%= link_to track_path, class: "flex flex-col items-center justify-center text-[#d5c4ab] hover:text-[#ffb800] transition-colors gap-0.5 no-underline flex-1" do %>
+      <span class="material-symbols-outlined text-[22px]">skateboarding</span>
+      <span class="font-body text-[10px] font-extrabold uppercase tracking-wider">Trilha</span>
+    <% end %>
+
+    <!-- 2. Picos & Spots da Comunidade -->
+    <%= link_to "#", onclick: "alert('Mapa de Picos & Quadras: Em breve!'); return false;", class: "flex flex-col items-center justify-center text-[#d5c4ab] hover:text-[#ffb800] transition-colors gap-0.5 no-underline flex-1" do %>
+      <span class="material-symbols-outlined text-[22px]">explore</span>
+      <span class="font-body text-[10px] font-extrabold uppercase tracking-wider">Picos</span>
+    <% end %>
+
+    <!-- 3. DESTAQUE CENTRAL: Gravação & Scanner IA (Botão Flutuante Tátil) -->
+    <div class="flex flex-col items-center justify-center -mt-6 flex-1">
+      <%= link_to "#", onclick: "alert('Scanner Biomecânico de Manobra: Posicione a câmera e grave 15s!'); return false;", class: "group flex h-14 w-14 items-center justify-center rounded-full bg-[#ffb800] text-black border-2 border-black shadow-[0_5px_0_#6b4c00] active:translate-y-[4px] active:shadow-[0_1px_0_#6b4c00] transition-all no-underline", aria: { label: "Gravar Manobra" } do %>
+        <span class="material-symbols-outlined text-[28px] font-black group-hover:scale-110 transition-transform">videocam</span>
+      <% end %>
+      <span class="font-body text-[10px] font-black uppercase text-[#ffb800] tracking-wider mt-1">Gravar</span>
+    </div>
+
+    <!-- 4. Ofensiva & Desafios -->
+    <%= link_to "#", onclick: "alert('Ofensiva: 🔥 14 Dias Consecutivos! Moedas Stance: 🪙 450'); return false;", class: "flex flex-col items-center justify-center text-[#d5c4ab] hover:text-[#ffb800] transition-colors gap-0.5 no-underline flex-1" do %>
+      <span class="material-symbols-outlined text-[22px] text-[#fd591e]">local_fire_department</span>
+      <span class="font-body text-[10px] font-extrabold uppercase tracking-wider">Ofensiva</span>
+    <% end %>
+
+    <!-- 5. Perfil do Skatista (Avatar com Rosto Oficial) -->
+    <%= link_to account_path, class: "flex flex-col items-center justify-center text-[#d5c4ab] hover:text-[#ffb800] transition-colors gap-0.5 no-underline flex-1" do %>
+      <div class="h-6 w-6 rounded-full border border-[#ffb800] p-[1px] bg-[#121316] overflow-hidden">
+        <%= image_tag "skater_avatar_head.png", alt: "Perfil", class: "h-full w-full rounded-full object-cover" %>
+      </div>
+      <span class="font-body text-[10px] font-extrabold uppercase tracking-wider">Perfil</span>
+    <% end %>
+  </div>
+</nav>

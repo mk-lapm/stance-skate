@@ -1,26 +1,65 @@
 <% content_for :section, "Landing" %>
 
-<section class="flex w-full min-h-[70dvh] max-w-[36rem] flex-col justify-center">
-  <h2 class="font-display text-display-lg text-on-surface">Bora andar de skate.</h2>
-  <p class="mt-xs font-display text-headline-md text-primary">Sem vergonha de errar e sem cair à toa.</p>
-
-  <p class="mt-md text-body-lg text-on-surface-variant">
-    Uma sequência de passos práticos desenhados para você dar sua primeira manobra
-    no seu ritmo. 100% privado.
-  </p>
-
-  <div class="mt-lg space-y-xs">
-    <%= link_to onboarding_age_gate_path, class: "btn-primary" do %>
-      Começar agora
-      <span class="material-symbols-outlined">arrow_forward</span>
-    <% end %>
-    <p class="text-center text-label-caps uppercase tracking-widest text-on-surface-variant/70">
-      Grátis, leva 1 min
-    </p>
+<div class="flex flex-col w-full relative overflow-hidden bg-[#0d0e11] text-[#e3e2e6] rounded-xl border border-[#292a2d] my-4 shadow-2xl">
+  <!-- Subtle decorative background vectors -->
+  <div class="absolute top-12 -right-8 opacity-20 pointer-events-none rotate-12">
+    <svg class="text-[#d5c4ab]" fill="none" height="200" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" width="200">
+      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+  </div>
+  <div class="absolute bottom-32 -left-16 opacity-10 pointer-events-none -rotate-45">
+    <svg class="text-[#d5c4ab]" fill="none" height="300" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" width="300">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
   </div>
 
-  <p class="mt-lg flex items-center justify-center gap-xs text-body-md text-on-surface-variant/70">
-    <span class="material-symbols-outlined text-[18px]">lock</span>
-    Você não precisa de conta para começar.
-  </p>
-</section>
+  <section class="w-full flex flex-col pt-4 px-4 sm:px-6 pb-8 relative z-10 max-w-[480px] mx-auto">
+    <!-- Hero Skater Card with Logo Overlay -->
+    <div class="relative w-full aspect-[4/5] mb-6 -rotate-2 bg-[#1f1f23] border border-[#343538] shadow-[8px_8px_0px_#121316]">
+      <div class="absolute -top-3 -right-3 z-20 bg-[#fd591e] text-black font-body text-[12px] font-bold uppercase px-2 py-1 rotate-6 shadow-[2px_2px_0px_#121316] border border-black" style="clip-path: polygon(2% 0%, 98% 3%, 100% 95%, 0% 100%);">
+        V. 1.0.4
+      </div>
+      <%= image_tag "skater_hero.jpg", alt: "Skatista", class: "w-full h-full object-cover grayscale contrast-125 brightness-90 mix-blend-luminosity opacity-90 p-1" %>
+      <div class="absolute inset-0 border-[4px] border-[#0d0e11] pointer-events-none m-1 mix-blend-overlay"></div>
+      
+      <!-- STANCE Official Transparent SVG Logo Overlay -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-30 p-4">
+        <%= image_tag "stance_logo_oficial.svg", alt: "STANCE Logo Oficial", class: "w-4/5 h-auto drop-shadow-[0_0_20px_rgba(0,0,0,0.9)]" %>
+      </div>
+    </div>
+
+    <!-- Text & Headline Hierarchy -->
+    <div class="flex flex-col gap-2 mb-6 relative">
+      <div class="absolute -left-4 top-2 w-1.5 h-16 bg-[#ffb800]"></div>
+      <h1 class="font-display text-[46px] sm:text-[54px] leading-[48px] sm:leading-[54px] tracking-tight font-black text-[#ffb800] uppercase break-words ml-2 drop-shadow-[2px_2px_0px_#6b4c00]">
+        Bora andar<br>de skate!
+      </h1>
+      
+      <div class="bg-[#121316] border border-[#343538] p-4 shadow-[4px_4px_0px_#0d0e11] mt-2 rotate-1 relative z-10">
+        <h2 class="font-display text-[20px] sm:text-[22px] leading-tight font-extrabold text-[#e3e2e6] uppercase mb-1">
+          Sem vergonha de errar<br>e sem cair à toa.
+        </h2>
+        <p class="font-body text-[14px] leading-relaxed text-[#d5c4ab]">
+          Uma sequência de passos práticos desenhados para você dar sua primeira manobra no seu ritmo. 100% privado.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="flex flex-col gap-2 items-center mt-auto w-full z-20">
+      <%= link_to onboarding_age_gate_path, class: "w-full group relative bg-[#ffb800] text-black font-display text-[20px] font-extrabold uppercase py-3.5 px-5 border border-[#2E3038] shadow-[0_6px_0px_#6b4c00] active:shadow-[0_0px_0px_#6b4c00] active:translate-y-[6px] transition-all duration-75 ease-out flex items-center justify-between no-underline" do %>
+        <span class="text-left flex-1">
+          Começar agora
+          <span class="text-[12px] leading-tight font-bold tracking-widest block mt-0.5 opacity-80">(Grátis, leva 1 min)</span>
+        </span>
+        <span class="material-symbols-outlined text-[32px] font-bold group-active:translate-x-1 transition-transform">arrow_forward</span>
+      <% end %>
+
+      <p class="mt-3 flex items-center justify-center gap-1.5 text-[13px] text-[#d5c4ab]/80 font-body">
+        <span class="material-symbols-outlined text-[16px]">lock</span>
+        Você não precisa de conta para começar.
+      </p>
+    </div>
+  </section>
+</div>

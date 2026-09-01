@@ -1,34 +1,57 @@
 <% content_for :section, "Ajuda" %>
 
-<h2 class="font-display text-headline-md">Como podemos ajudar?</h2>
-<p class="mt-xs text-body-md text-on-surface-variant">
-  Escolha uma opção abaixo para falar com a equipe.
-</p>
+<div class="flex flex-col w-full gap-md">
+  <div class="flex flex-col gap-xs">
+    <span class="step-indicator">CENTRAL DE SUPORTE</span>
+    <h1 class="screen-title">Como podemos ajudar?</h1>
+    <p class="screen-desc">Fale diretamente com nossa equipe por WhatsApp em até 1 dia útil.</p>
+  </div>
 
-<%= form_with model: @support_request, url: support_requests_path, class: "mt-md space-y-xs" do |f| %>
-  <%= f.hidden_field :maneuver_id, value: @maneuver&.id %>
+  <div class="flex flex-col gap-sm">
+    <div class="sub-headline-card" style="border-left: 4px solid #ff5a5f; transform: none; background: #1a1b20; padding: 10px; cursor: pointer;" onclick="alert('Abrindo WhatsApp prioritário de emergência...')">
+      <div class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-[#ff5a5f] text-[24px]">medical_services</span>
+        <div>
+          <h3 class="text-[12px] font-bold text-[#ff5a5f] uppercase">🚨 Me Machuquei (Urgente)</h3>
+          <p class="text-[10px] text-on-surface-variant">Atendimento prioritário e guia de primeiros socorros.</p>
+        </div>
+      </div>
+    </div>
 
-  <% [
-       [ "injury",    "medical_services", "Me machuquei (atendimento de emergência)", "Gera WhatsApp com suporte prioritário." ],
-       [ "stuck",     "help",             "Travei em uma manobra",                    "Dicas técnicas ou grave um clipe." ],
-       [ "technical", "bug_report",       "Problema técnico no site",                 "Relate bugs ou falhas de carregamento." ]
-     ].each do |value, icon, title, hint| %>
-    <label class="card flex cursor-pointer items-start gap-sm has-[:checked]:border-primary">
-      <%= f.radio_button :kind, value, class: "mt-1 accent-[#ffb800]", required: true,
-            checked: @support_request.kind == value %>
-      <span class="material-symbols-outlined text-primary"><%= icon %></span>
-      <span>
-        <span class="block text-body-md text-on-surface"><%= title %></span>
-        <span class="block text-label-caps text-on-surface-variant/70"><%= hint %></span>
-      </span>
-    </label>
-  <% end %>
+    <div class="sub-headline-card" style="border-left: 4px solid #ffb800; transform: none; background: #1a1b20; padding: 10px; cursor: pointer;" onclick="alert('Abrindo suporte de peças...')">
+      <div class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-primary text-[24px]">skateboarding</span>
+        <div>
+          <h3 class="text-[12px] font-bold text-on-surface uppercase">🛹 Dúvidas de Peças & Setup</h3>
+          <p class="text-[10px] text-on-surface-variant">Onde comprar e como montar o skate ideal.</p>
+        </div>
+      </div>
+    </div>
 
-  <%= f.text_area :message, rows: 2, class: "field mt-md", placeholder: "Conta rapidinho o que aconteceu (opcional)" %>
-  <%= f.button "Falar no WhatsApp", type: :submit, class: "btn-primary mt-md" %>
-<% end %>
+    <div class="sub-headline-card" style="border-left: 4px solid #30D158; transform: none; background: #1a1b20; padding: 10px; cursor: pointer;" onclick="alert('Abrindo mentoria humana...')">
+      <div class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-tertiary text-[24px]">school</span>
+        <div>
+          <h3 class="text-[12px] font-bold text-on-surface uppercase">🔒 Travei numa Manobra</h3>
+          <p class="text-[10px] text-on-surface-variant">Fale com um mentor skatista para destravar sua evolução.</p>
+        </div>
+      </div>
+    </div>
 
-<p class="mt-md flex items-center justify-center gap-xs text-label-caps text-on-surface-variant/70">
-  <span class="material-symbols-outlined text-[16px]">schedule</span>
-  Respondemos por WhatsApp em até 1 dia útil por um humano nomeado.
-</p>
+    <div class="sub-headline-card" style="border-left: 4px solid #9e8f78; transform: none; background: #1a1b20; padding: 10px; cursor: pointer;" onclick="alert('Abrindo relato de bug...')">
+      <div class="flex items-center gap-sm">
+        <span class="material-symbols-outlined text-outline text-[24px]">bug_report</span>
+        <div>
+          <h3 class="text-[12px] font-bold text-on-surface uppercase">🐛 Problema Técnico no App</h3>
+          <p class="text-[10px] text-on-surface-variant">Relate erros técnicos ou lentidão no sistema.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-md pt-sm border-t border-surface-container-highest text-center">
+    <p class="text-[10px] text-on-surface-variant uppercase tracking-wider">
+      Respondemos em até 1 dia útil por um humano da nossa equipe.
+    </p>
+  </div>
+</div>

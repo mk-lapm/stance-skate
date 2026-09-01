@@ -1,0 +1,116 @@
+<% content_for :section, "Ofensiva" %>
+
+<div class="flex flex-col w-full max-w-[480px] mx-auto px-4 py-4 gap-6 pb-20 relative">
+  <!-- Top Currency Banner -->
+  <div class="flex items-center justify-between">
+    <span class="font-body text-[12px] font-extrabold text-[#ffb800] uppercase tracking-wider">🔥 Sequência & Resgates</span>
+    <div class="bg-[#ffb800] text-black px-3 py-1 font-body text-[12px] font-black uppercase tracking-wider -rotate-2 border border-black shadow-[2px_2px_0_#121316]">
+      🪙 450 Moedas Stance
+    </div>
+  </div>
+
+  <!-- Streak Widget with Spinning Skate Wheel -->
+  <div class="relative bg-[#1f1f23] border border-[#343538] p-4 shadow-[4px_4px_0_#121316] rounded-lg">
+    <div class="absolute -top-3 -right-2 bg-[#fd591e] text-black font-body text-[11px] font-extrabold uppercase px-2.5 py-0.5 rotate-6 shadow-[2px_2px_0_#121316] border border-black z-10" style="clip-path: polygon(2% 0%, 98% 3%, 100% 95%, 0% 100%);">
+      Recorde Pessoal!
+    </div>
+
+    <div class="flex items-center gap-3.5 mb-3">
+      <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#ffb800] shadow-[0_0_12px_rgba(255,184,0,0.4)] shrink-0">
+        <%= image_tag "skate_wheel_streak.jpg", alt: "Roda de Skate Ofensiva", class: "w-full h-full object-cover" %>
+      </div>
+      <div>
+        <h2 class="font-display text-[26px] font-black text-[#ffb800] leading-none">14 DIAS</h2>
+        <span class="font-body text-[12px] font-extrabold text-[#e3e2e6] uppercase">De Ofensiva · Roda Aquecida</span>
+      </div>
+    </div>
+
+    <p class="font-body text-[13px] text-[#d5c4ab] mb-3">Bora treinar hoje para manter o embalo?</p>
+
+    <!-- Weekly Calendar -->
+    <div class="flex justify-between items-center bg-[#0d0e11] p-2.5 border border-[#292a2d] rounded-md">
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-body text-[10px] text-[#9e8f78] font-bold">D</span>
+        <div class="w-7 h-7 bg-[#ffb800] text-black font-bold rounded flex items-center justify-center text-[12px]">✓</div>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-body text-[10px] text-[#9e8f78] font-bold">S</span>
+        <div class="w-7 h-7 bg-[#ffb800] text-black font-bold rounded flex items-center justify-center text-[12px]">✓</div>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-body text-[10px] text-[#9e8f78] font-bold">T</span>
+        <div class="w-7 h-7 bg-[#ffb800] text-black font-bold rounded flex items-center justify-center text-[12px]">✓</div>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-body text-[10px] text-[#9e8f78] font-bold">Q</span>
+        <div class="w-7 h-7 bg-[#ffb800] text-black font-bold rounded flex items-center justify-center text-[12px]">✓</div>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-body text-[10px] text-[#ffb800] font-bold">Q</span>
+        <div class="w-7 h-7 border-2 border-dashed border-[#ffb800] rounded flex items-center justify-center text-[10px] text-[#ffb800] font-black animate-pulse">HOJE</div>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-body text-[10px] text-[#514532] font-bold">S</span>
+        <div class="w-7 h-7 bg-[#1f1f23] border border-[#343538] rounded"></div>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="font-body text-[10px] text-[#514532] font-bold">S</span>
+        <div class="w-7 h-7 bg-[#1f1f23] border border-[#343538] rounded"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Constancy Track (Skate 3 Milestones) -->
+  <div class="flex flex-col gap-2">
+    <h3 class="font-display text-[16px] font-black text-[#e3e2e6] uppercase">Metas de Constância</h3>
+    <div class="relative h-24 rounded-lg overflow-hidden border border-[#343538] shadow-[4px_4px_0_#121316]">
+      <%= image_tag "skate_track_milestones.jpg", alt: "Pista Skate 3", class: "w-full h-full object-cover opacity-75" %>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#121316]/90 to-transparent flex items-end p-2.5 justify-between">
+        <span class="font-body text-[11px] text-[#30D158] font-black">✓ 10 DIAS (Liberado)</span>
+        <span class="font-body text-[11px] text-[#ffb800] font-black">50 DIAS (Em Progresso)</span>
+        <span class="font-body text-[11px] text-[#9e8f78] font-black">100 DIAS 🔒</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rewards Shop -->
+  <div class="flex flex-col gap-2.5">
+    <h3 class="font-display text-[16px] font-black text-[#e3e2e6] uppercase flex items-center justify-between">
+      <span>Loja de Resgate</span>
+      <span class="text-[#ffb800] text-[12px] font-body">Parceiros Oficiais</span>
+    </h3>
+
+    <!-- Reward Card 1 -->
+    <div class="flex bg-[#1f1f23] border border-[#343538] rounded-lg p-3 justify-between items-center shadow-[3px_3px_0_#121316]">
+      <div>
+        <h4 class="font-body text-[14px] font-bold text-[#e3e2e6]">15% OFF em Lixas</h4>
+        <p class="font-body text-[11px] text-[#ffb800] font-bold">Over Street</p>
+      </div>
+      <button onclick="alert('Cupom OVERSTREET15 resgatado!')" class="bg-[#ffb800] text-black font-body text-[12px] font-black uppercase py-2 px-3 border border-[#2E3038] shadow-[0_3px_0_#6b4c00] active:translate-y-[2px]">
+        300 🪙 Resgatar
+      </button>
+    </div>
+
+    <!-- Reward Card 2 -->
+    <div class="flex bg-[#1f1f23] border border-[#343538] rounded-lg p-3 justify-between items-center shadow-[3px_3px_0_#121316] opacity-70">
+      <div>
+        <h4 class="font-body text-[14px] font-bold text-[#e3e2e6]">Frete Grátis</h4>
+        <p class="font-body text-[11px] text-[#9e8f78]">Kings Sneakers</p>
+      </div>
+      <button class="bg-[#343538] text-[#9e8f78] font-body text-[12px] font-bold uppercase py-2 px-3 border border-[#343538] cursor-not-allowed">
+        500 🪙 Bloqueado
+      </button>
+    </div>
+
+    <!-- Reward Card 3 -->
+    <div class="flex bg-[#1f1f23] border border-[#343538] rounded-lg p-3 justify-between items-center shadow-[3px_3px_0_#121316] opacity-70">
+      <div>
+        <h4 class="font-body text-[14px] font-bold text-[#e3e2e6]">Desconto em Rolamentos</h4>
+        <p class="font-body text-[11px] text-[#9e8f78]">Red Bones</p>
+      </div>
+      <button class="bg-[#343538] text-[#9e8f78] font-body text-[12px] font-bold uppercase py-2 px-3 border border-[#343538] cursor-not-allowed">
+        1000 🪙 Bloqueado
+      </button>
+    </div>
+  </div>
+</div>

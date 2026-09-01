@@ -1,27 +1,81 @@
-<% content_for :section, "Plano" %>
+<% content_for :section, "Plano & Lojas" %>
 
-<section class="flex min-h-[60dvh] flex-col justify-center">
-  <span class="material-symbols-outlined icon-filled text-[40px] text-primary">check_circle</span>
-
-  <h2 class="mt-xs font-display text-display-lg">Entendido.</h2>
-  <p class="mt-md text-body-lg text-on-surface"><%= @planner.summary %></p>
-  <p class="mt-xs text-body-md text-on-surface-variant"><%= @planner.reassurance %></p>
-
-  <% if @planner.recommended_drills.any? %>
-    <div class="card mt-md">
-      <span class="chip">Recomendado para você</span>
-      <ul class="mt-xs space-y-xs">
-        <% @planner.recommended_drills.each do |drill| %>
-          <li class="flex items-center gap-xs text-body-md text-on-surface">
-            <span class="material-symbols-outlined text-primary">bolt</span>
-            <%= drill.label %>
-          </li>
-        <% end %>
-      </ul>
+<div class="flex flex-col w-full max-w-[480px] mx-auto px-4 py-2 gap-5 pb-24 relative">
+  <!-- Alerta Amigo (Ogilvy Voice) -->
+  <div class="bg-[#1f1f23] border border-[#343538] p-4 rounded-lg shadow-[4px_4px_0_#121316] relative">
+    <div class="absolute -top-3 left-4 bg-[#fd591e] text-black px-2.5 py-0.5 font-display text-[11px] font-black uppercase rotate-[-2deg] shadow-[2px_2px_0_#121316] border border-black">
+      Alerta Amigo
     </div>
-  <% end %>
+    
+    <div class="mt-2 flex gap-3 items-start">
+      <div class="shrink-0 w-9 h-9 rounded-full bg-[#343538] border border-[#ffb800] flex items-center justify-center text-[#ffb800]">
+        <span class="material-symbols-outlined text-[20px]">warning</span>
+      </div>
+      <div>
+        <h2 class="font-display text-[17px] font-black text-[#e3e2e6] uppercase mb-1">Não jogue dinheiro fora</h2>
+        <p class="font-body text-[13px] text-[#d5c4ab] leading-relaxed">
+          Skate de brinquedo quebra rápido, as rodinhas travam no asfalto e você perde a vontade de andar. Se você ainda não tem um skate ou quer trocar de peça, fechamos cupons exclusivos com as skateshops mais confiáveis do país.
+        </p>
+      </div>
+    </div>
+  </div>
 
-  <%= link_to maneuver_path(@planner.entry_maneuver), class: "btn-primary mt-lg" do %>
-    Ver meu primeiro passo <span class="material-symbols-outlined">arrow_forward</span>
-  <% end %>
-</section>
+  <!-- Lojas Parceiras Banner Graphic -->
+  <div class="relative h-28 rounded-lg overflow-hidden border border-[#343538] shadow-[4px_4px_0_#121316]">
+    <%= image_tag "skateshop_partners_stickers.jpg", alt: "Skateshops Parceiras", class: "w-full h-full object-cover" %>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#121316] via-transparent to-transparent flex items-end p-2.5">
+      <span class="font-display text-[13px] font-black uppercase text-[#ffb800] tracking-wider">Lojas Oficiais do Rolê</span>
+    </div>
+  </div>
+
+  <!-- Partner Coupons Grid -->
+  <div class="grid grid-cols-2 gap-3">
+    <!-- Over Street -->
+    <div class="bg-[#1f1f23] border border-[#343538] p-3 rounded-lg relative shadow-[2px_2px_0_#121316]">
+      <div class="absolute -top-2 -right-2 bg-[#30D158] text-black px-1.5 py-0.5 font-body text-[10px] font-black uppercase rotate-3 shadow border border-black">
+        -15%
+      </div>
+      <div class="font-display text-[15px] font-black text-[#e3e2e6] uppercase">Over Street</div>
+      <div class="font-body text-[11px] text-[#ffb800] font-bold mt-0.5">CUPOM: STANCE15</div>
+      <span class="font-body text-[10px] text-[#9e8f78] block mt-1">Shapes, trucks e rodas</span>
+    </div>
+
+    <!-- Censury Theory -->
+    <div class="bg-[#1f1f23] border border-[#343538] p-3 rounded-lg relative shadow-[2px_2px_0_#121316]">
+      <div class="absolute -top-2 -right-2 bg-[#30D158] text-black px-1.5 py-0.5 font-body text-[10px] font-black uppercase rotate-[-2deg] shadow border border-black">
+        -10%
+      </div>
+      <div class="font-display text-[15px] font-black text-[#e3e2e6] uppercase">Censury</div>
+      <div class="font-body text-[11px] text-[#ffb800] font-bold mt-0.5">CUPOM: STANCE10</div>
+      <span class="font-body text-[10px] text-[#9e8f78] block mt-1">Streetwear e decks</span>
+    </div>
+
+    <!-- HAMP -->
+    <div class="bg-[#1f1f23] border border-[#343538] p-3 rounded-lg relative shadow-[2px_2px_0_#121316]">
+      <div class="absolute -top-2 -right-2 bg-[#30D158] text-black px-1.5 py-0.5 font-body text-[10px] font-black uppercase rotate-3 shadow border border-black">
+        -20%
+      </div>
+      <div class="font-display text-[15px] font-black text-[#e3e2e6] uppercase">HAMP</div>
+      <div class="font-body text-[11px] text-[#ffb800] font-bold mt-0.5">CUPOM: STANCE20</div>
+      <span class="font-body text-[10px] text-[#9e8f78] block mt-1">Confecção e lixas</span>
+    </div>
+
+    <!-- Kings Sneakers -->
+    <div class="bg-[#1f1f23] border border-[#343538] p-3 rounded-lg relative shadow-[2px_2px_0_#121316]">
+      <div class="absolute -top-2 -right-2 bg-[#ffb800] text-black px-1.5 py-0.5 font-body text-[10px] font-black uppercase rotate-[-3deg] shadow border border-black">
+        Grátis
+      </div>
+      <div class="font-display text-[15px] font-black text-[#e3e2e6] uppercase">Kings</div>
+      <div class="font-body text-[11px] text-[#ffb800] font-bold mt-0.5">Frete Grátis</div>
+      <span class="font-body text-[10px] text-[#9e8f78] block mt-1">Tênis para skate</span>
+    </div>
+  </div>
+
+  <!-- Continuation Button (High Contrast Yellow & Shadow) -->
+  <div class="mt-3">
+    <%= link_to track_path, class: "w-full group relative bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_4px_0_#6b4c00] active:translate-y-[3px] active:shadow-none transition-all duration-75 ease-out flex items-center justify-center gap-2 no-underline" do %>
+      <span>Continuar para meu treino</span>
+      <span class="material-symbols-outlined text-[24px] font-bold">arrow_forward</span>
+    <% end %>
+  </div>
+</div>

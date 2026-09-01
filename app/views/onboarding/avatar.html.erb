@@ -1,0 +1,85 @@
+<% content_for :section, "Customização" %>
+
+<div class="flex flex-col w-full max-w-[480px] mx-auto pb-24 relative overflow-hidden">
+  <!-- Skater Preview Stage Area -->
+  <div class="relative w-full h-64 bg-gradient-to-b from-[#1b1b1f] to-[#121316] border-b border-[#343538] flex items-center justify-center overflow-hidden">
+    <!-- Street Floor Texture Overlay -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style="background-image: url('<%= image_path("skate_track_milestones.jpg") %>');"></div>
+    
+    <!-- Character Avatar Image -->
+    <div class="relative z-10 w-44 h-44 rounded-full overflow-hidden border-4 border-[#ffb800] shadow-[0_0_25px_rgba(255,184,0,0.3)] bg-[#0d0e11] p-2 flex items-center justify-center">
+      <%= image_tag "skater_avatar_head.png", alt: "Skatista Avatar", class: "w-full h-full object-cover rounded-full" %>
+    </div>
+
+    <!-- Badge Tape -->
+    <div class="absolute top-3 left-4 bg-[#6cff82] text-[#002106] font-display text-[11px] font-black uppercase px-2.5 py-0.5 -rotate-3 shadow-[2px_2px_0_#002106] border border-black z-20">
+      DROP OFICIAL
+    </div>
+  </div>
+
+  <!-- Customization Controls Panel -->
+  <div class="flex flex-col px-4 pt-4 gap-4">
+    <!-- Gender Toggle -->
+    <div class="grid grid-cols-2 gap-3">
+      <button type="button" class="py-3 px-4 bg-[#ffb800] text-black font-display text-[15px] font-black uppercase border border-[#2E3038] shadow-[0_3px_0_#6b4c00]">
+        👦 Skatista Masc
+      </button>
+      <button type="button" class="py-3 px-4 bg-[#1f1f23] text-[#e3e2e6] font-display text-[15px] font-black uppercase border border-[#343538] shadow-[0_3px_0_#121316] opacity-75">
+        👧 Skatista Fem
+      </button>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex border-b border-[#343538] gap-4 pb-2 text-[14px] font-display font-bold uppercase overflow-x-auto">
+      <span class="text-[#ffb800] border-b-2 border-[#ffb800] pb-1 cursor-pointer">Roupas</span>
+      <span class="text-[#9e8f78] pb-1 cursor-pointer">Cabelo</span>
+      <span class="text-[#9e8f78] pb-1 cursor-pointer">Acessórios</span>
+      <span class="text-[#9e8f78] pb-1 cursor-pointer">Shape / Lixa</span>
+    </div>
+
+    <!-- Outfits Items Grid -->
+    <div class="flex flex-col gap-3">
+      <span class="font-body text-[12px] font-bold text-[#e3e2e6] uppercase flex items-center gap-1.5">
+        <span class="w-2 h-2 bg-[#ffb800] rounded-full inline-block"></span>
+        Streetwear Tops
+      </span>
+
+      <div class="grid grid-cols-3 gap-2.5">
+        <!-- Item 1: Selected -->
+        <div class="p-2 bg-[#1f1f23] border-2 border-[#ffb800] rounded-lg flex flex-col items-center gap-1.5 shadow-[0_0_10px_rgba(255,184,0,0.2)] cursor-pointer">
+          <div class="w-10 h-10 bg-[#0d0e11] rounded flex items-center justify-center text-[#ffb800]">
+            <span class="material-symbols-outlined">checkroom</span>
+          </div>
+          <span class="font-body text-[11px] font-bold text-[#e3e2e6]">Hoodie Preto</span>
+          <span class="font-body text-[9px] text-[#30D158] uppercase font-bold">Equipado</span>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="p-2 bg-[#1f1f23] border border-[#343538] rounded-lg flex flex-col items-center gap-1.5 cursor-pointer hover:border-[#ffb800]">
+          <div class="w-10 h-10 bg-[#0d0e11] rounded flex items-center justify-center text-[#9e8f78]">
+            <span class="material-symbols-outlined">apparel</span>
+          </div>
+          <span class="font-body text-[11px] font-bold text-[#e3e2e6]">Camisa Raglan</span>
+          <span class="font-body text-[9px] text-[#9e8f78] uppercase">Desbloqueado</span>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="p-2 bg-[#1f1f23] border border-[#343538] rounded-lg flex flex-col items-center gap-1.5 opacity-60 cursor-pointer">
+          <div class="w-10 h-10 bg-[#0d0e11] rounded flex items-center justify-center text-[#514532]">
+            <span class="material-symbols-outlined">lock</span>
+          </div>
+          <span class="font-body text-[11px] font-bold text-[#9e8f78]">Over Street Tee</span>
+          <span class="font-body text-[9px] text-[#ffb800] uppercase font-bold">150 🪙</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Action Button -->
+    <div class="mt-4 pt-2">
+      <%= link_to track_path, class: "w-full group relative bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_4px_0_#6b4c00] active:translate-y-[3px] active:shadow-none transition-all duration-75 ease-out flex items-center justify-center gap-2 no-underline cursor-pointer" do %>
+        <span>Salvar Skatista & Entrar na Trilha</span>
+        <span class="material-symbols-outlined text-[24px] font-bold">arrow_forward</span>
+      <% end %>
+    </div>
+  </div>
+</div>

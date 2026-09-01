@@ -1,23 +1,51 @@
 <% content_for :section, "Instalação" %>
 
-<section class="card">
-  <span class="material-symbols-outlined text-primary">add_to_home_screen</span>
-  <h2 class="mt-xs font-display text-headline-md">Adicione o Skate à sua tela inicial</h2>
-  <p class="mt-xs text-body-md text-on-surface-variant">
-    Evite que o Safari ou Chrome apague seu progresso após uma semana.
-    É como um app de verdade, mas sem ir para a App Store.
-  </p>
+<div class="flex flex-col w-full max-w-[480px] mx-auto px-4 gap-6 pb-12 relative overflow-hidden">
+  <!-- Zine Header Graphic with Logo & Skater Avatar Accent -->
+  <div class="relative w-full h-52 flex items-center justify-center mt-4">
+    <!-- Center Badge with Official STANCE Logo -->
+    <div class="relative z-10 w-44 h-44 bg-[#e3e2e6] rounded-full flex items-center justify-center shadow-[4px_4px_0_#FFB800] p-4 rotate-3 border-2 border-black">
+      <%= image_tag "stance_logo_oficial.svg", alt: "STANCE Logo Oficial", class: "w-full h-full object-contain" %>
+    </div>
+  </div>
 
-  <ol class="mt-md space-y-xs text-body-md text-on-surface-variant">
-    <li class="flex items-center gap-xs">
-      <span class="material-symbols-outlined text-primary">ios_share</span>
-      Toque em <strong class="text-on-surface">Compartilhar</strong>
-    </li>
-    <li class="flex items-center gap-xs">
-      <span class="material-symbols-outlined text-primary">add_box</span>
-      Depois em <strong class="text-on-surface">“Adicionar à Tela de Início”</strong>
-    </li>
-  </ol>
-</section>
+  <!-- Header Text -->
+  <div class="flex flex-col gap-2 relative z-10">
+    <h1 class="font-display text-[32px] sm:text-[36px] text-[#e3e2e6] uppercase font-black leading-tight tracking-tight">
+      Adicione o <span class="text-[#ffb800]">Stance</span><br>à sua tela<br>inicial
+    </h1>
+    <div class="w-12 h-1 bg-[#ffb800] mt-1"></div>
+  </div>
 
-<%= link_to "Continuar no navegador por enquanto", track_path, class: "btn-tertiary mt-md block" %>
+  <!-- Native Instruction Modal Replica -->
+  <div class="flex flex-col bg-[#1f1f23] border border-[#343538] rounded-lg p-4 gap-3 shadow-[4px_4px_0_#0d0e11] relative z-10">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-[#292a2d] flex items-center justify-center flex-shrink-0 shadow-inner">
+        <span class="material-symbols-outlined text-[#ffdca1] text-[24px]">ios_share</span>
+      </div>
+      <p class="font-body text-[15px] leading-snug text-[#e3e2e6]">
+        Toque em <strong class="text-white font-bold">Compartilhar</strong> e depois em <strong class="text-[#ffb800] font-bold">"Adicionar à Tela de Início"</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Explanation Text -->
+  <div class="bg-[#343538]/80 p-3.5 border-l-4 border-l-[#fd591e] shadow-[2px_2px_0_#0d0e11]">
+    <p class="font-body text-[14px] text-[#d5c4ab] leading-relaxed">
+      Evite que o Safari ou Chrome apague seu progresso após uma semana. É como um app de verdade, mas sem ir para a App Store.
+    </p>
+  </div>
+
+  <!-- Action Area -->
+  <div class="flex flex-col gap-3 mt-auto pt-2 relative z-10">
+    <button onclick="alert('Instrução: Toque no menu do seu navegador e escolha Adicionar à Tela Inicial')" class="w-full bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_6px_0_#6b4c00] active:translate-y-[4px] active:shadow-[0_2px_0_#6b4c00] transition-transform duration-75 ease-out">
+      Adicionar atalho
+    </button>
+    
+    <%= link_to track_path, class: "w-full py-3 text-center no-underline" do %>
+      <span class="font-body text-[12px] font-bold text-[#d5c4ab] uppercase tracking-widest underline decoration-[#343538] underline-offset-4 hover:text-[#ffb800] transition-colors">
+        Continuar no navegador por enquanto
+      </span>
+    <% end %>
+  </div>
+</div>

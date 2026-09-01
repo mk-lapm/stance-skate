@@ -1,28 +1,44 @@
 <% content_for :section, "Diagnóstico" %>
-<%= render "shared/progress_bar", label: "Passo 2 de 3", percentage: 33 %>
+<%= render "shared/progress_bar", label: "Passo 2 de 3", percentage: 66 %>
 
-<h2 class="font-display text-headline-md">O que é mais difícil para você hoje?</h2>
-<p class="mt-xs text-body-md text-on-surface-variant">Pode escolher mais de uma opção se quiser.</p>
+<div class="flex flex-col w-full max-w-[480px] mx-auto gap-4 mt-2">
+  <div class="relative">
+    <h1 class="font-display text-[30px] sm:text-[34px] font-black uppercase text-[#e3e2e6] leading-tight tracking-tight pr-12">
+      O que é mais difícil para você hoje?
+    </h1>
+    <div class="absolute -top-3 right-0 bg-[#fd591e] text-black font-body text-[10px] font-black uppercase px-2 py-0.5 rotate-6 shadow-[1px_1px_0_#121316] border border-black z-10" style="clip-path: polygon(2% 0%, 98% 3%, 100% 95%, 0% 100%);">
+      Pode marcar mais de uma
+    </div>
+  </div>
 
-<%= form_with model: @diagnosis, url: onboarding_diagnosis_path(step: "blockers"), method: :patch, class: "mt-md space-y-xs" do |f| %>
-  <%= hidden_field_tag "diagnosis[blockers][]", "" %>
+  <%= form_with model: @diagnosis, url: onboarding_diagnosis_path(step: "blockers"), method: :patch, class: "flex flex-col gap-3" do |f| %>
+    <%= hidden_field_tag "diagnosis[blockers][]", "" %>
 
-  <% [
-       [ "fear_of_falling", "falling",        "Medo de cair e me machucar",           "A segurança física é sua maior barreira." ],
-       [ "shame",           "visibility_off", "Vergonha de treinar na frente dos outros", "O julgamento alheio te trava na pista." ],
-       [ "foot_technique",  "skateboarding",  "Não sei qual o movimento certo do pé",  "Falta técnica e memória muscular." ],
-       [ "no_place",        "location_off",   "Falta de lugar adequado",               "Não tem onde praticar com tranquilidade." ]
-     ].each do |value, icon, title, hint| %>
-    <label class="card flex cursor-pointer items-start gap-sm has-[:checked]:border-primary">
-      <%= check_box_tag "diagnosis[blockers][]", value, @diagnosis.blocker_kinds.include?(value),
-            id: "blocker_#{value}", class: "mt-1 accent-[#ffb800]" %>
-      <span class="material-symbols-outlined text-primary"><%= icon %></span>
-      <span>
-        <span class="block text-body-md text-on-surface"><%= title %></span>
-        <span class="block text-label-caps text-on-surface-variant/70"><%= hint %></span>
-      </span>
-    </label>
+    <% [
+         [ "fear_of_falling", "healing",          "Medo de cair e me machucar",           "Aquele receio de cair de mau jeito e forçar o punho no chão." ],
+         [ "shame",           "visibility_off",   "Vergonha de treinar na frente dos outros", "Ficar travado porque a galera que já sabe andar fica olhando." ],
+         [ "foot_technique",  "skateboarding",    "Não sei qual o movimento certo do pé",  "Não saber onde encaixar o pé de base e como bater o tail com firmeza." ],
+         [ "no_place",        "location_off",     "Falta de lugar adequado e vazio",      "Não ter uma garagem lisa ou quadra sem movimento perto de casa." ]
+       ].each do |value, icon, title, hint| %>
+      <label class="relative group cursor-pointer w-full flex items-start p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+        <%= check_box_tag "diagnosis[blockers][]", value, @diagnosis.blocker_kinds.include?(value),
+              id: "blocker_#{value}", class: "mt-1 accent-[#ffb800] w-4 h-4 mr-3" %>
+        <div class="flex items-start gap-2.5">
+          <span class="material-symbols-outlined text-[#ffb800] text-[22px] mt-0.5"><%= icon %></span>
+          <div class="flex flex-col">
+            <span class="font-body text-[15px] font-bold text-[#e3e2e6]"><%= title %></span>
+            <span class="font-body text-[12px] text-[#d5c4ab] mt-0.5 leading-snug"><%= hint %></span>
+          </div>
+        </div>
+      </label>
+    <% end %>
+
+    <!-- High-Contrast Mechanical Button -->
+    <div class="mt-4 pt-2">
+      <%= f.button type: :submit, class: "w-full group relative bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_4px_0_#6b4c00] active:translate-y-[3px] active:shadow-none transition-all duration-75 ease-out flex items-center justify-center gap-2 cursor-pointer" do %>
+        <span>Avançar</span>
+        <span class="material-symbols-outlined text-[24px] font-bold">arrow_forward</span>
+      <% end %>
+    </div>
   <% end %>
-
-  <%= f.button "Avançar", type: :submit, class: "btn-primary mt-md" %>
-<% end %>
+</div>

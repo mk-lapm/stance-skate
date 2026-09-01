@@ -1,22 +1,58 @@
 <% content_for :section, "Diagnóstico" %>
-<%= render "shared/progress_bar", label: "Passo 1 de 3", percentage: 0 %>
+<%= render "shared/progress_bar", label: "Passo 1 de 3", percentage: 33 %>
 
-<h2 class="font-display text-headline-md">Qual é o seu nível hoje?</h2>
+<div class="flex flex-col w-full max-w-[480px] mx-auto gap-4 mt-2">
+  <h1 class="font-display text-[32px] sm:text-[36px] font-black uppercase text-[#e3e2e6] leading-tight tracking-tight">
+    Qual é o seu nível hoje?
+  </h1>
 
-<%= form_with model: @diagnosis, url: onboarding_diagnosis_path(step: "level"), method: :patch, class: "mt-md space-y-xs" do |f| %>
-  <% {
-       "never_ridden"   => "Nunca subi em um skate",
-       "can_push"       => "Consigo remar (empurrar) e fazer curvas, mas não mando nenhuma manobra",
-       "stuck_on_ollie" => "Estou travado tentando mandar o Ollie"
-     }.each do |value, label| %>
-    <label class="card flex cursor-pointer items-start gap-sm has-[:checked]:border-primary">
-      <%= f.radio_button :level, value, class: "mt-1 accent-[#ffb800]", required: true,
-            checked: @diagnosis.level == value %>
-      <span class="text-body-md text-on-surface"><%= label %></span>
+  <%= form_with model: @diagnosis, url: onboarding_diagnosis_path(step: "level"), method: :patch, class: "flex flex-col gap-3" do |f| %>
+    <!-- Option 1: Zero -->
+    <label class="relative group cursor-pointer w-full flex items-start p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <%= f.radio_button :level, "never_ridden", class: "mt-1 accent-[#ffb800] w-4 h-4 mr-3", required: true, checked: @diagnosis.level == "never_ridden" %>
+      <div class="flex flex-col">
+        <span class="font-body text-[16px] font-bold text-[#e3e2e6]">Nunca subi em um skate</span>
+        <span class="font-body text-[12px] text-[#d5c4ab]">Quero aprender a ficar de pé, remar e cair sem me machucar</span>
+      </div>
     </label>
-  <% end %>
 
-  <%= f.button type: :submit, class: "btn-primary mt-md" do %>
-    Continuar <span class="material-symbols-outlined">arrow_forward</span>
+    <!-- Option 2: Base -->
+    <label class="relative group cursor-pointer w-full flex items-start p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <%= f.radio_button :level, "can_push", class: "mt-1 accent-[#ffb800] w-4 h-4 mr-3", required: true, checked: @diagnosis.level == "can_push" %>
+      <div class="flex flex-col">
+        <span class="font-body text-[16px] font-bold text-[#e3e2e6]">Consigo remar e fazer curvas</span>
+        <span class="font-body text-[12px] text-[#d5c4ab]">Mas ainda não tenho segurança para mandar manobras no chão</span>
+      </div>
+    </label>
+
+    <!-- Option 3: Ollie Trap (Default Selected & Tape Badge) -->
+    <label class="relative group cursor-pointer w-full flex items-start p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <!-- Tape Badge -->
+      <div class="absolute -top-3 -right-2 bg-[#fd591e] text-black font-body text-[10px] font-black uppercase px-2 py-0.5 rotate-3 shadow-[1px_1px_0_#121316] border border-black z-10" style="clip-path: polygon(2% 0%, 98% 3%, 100% 95%, 0% 100%);">
+        Mais comum
+      </div>
+      <%= f.radio_button :level, "stuck_on_ollie", class: "mt-1 accent-[#ffb800] w-4 h-4 mr-3", required: true, checked: (@diagnosis.level == "stuck_on_ollie" || @diagnosis.level.blank?) %>
+      <div class="flex flex-col">
+        <span class="font-body text-[16px] font-bold text-[#e3e2e6]">Estou travado tentando mandar o Ollie</span>
+        <span class="font-body text-[12px] text-[#d5c4ab]">O pop bate mas o skate não sobe ou o pé de trás escapa</span>
+      </div>
+    </label>
+
+    <!-- Option 4: Advanced -->
+    <label class="relative group cursor-pointer w-full flex items-start p-4 bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:shadow-[0_0_15px_rgba(255,184,0,0.15)] rounded-lg transition-all">
+      <%= f.radio_button :level, "advanced_combos", class: "mt-1 accent-[#ffb800] w-4 h-4 mr-3", required: true, checked: @diagnosis.level == "advanced_combos" %>
+      <div class="flex flex-col">
+        <span class="font-body text-[16px] font-bold text-[#e3e2e6]">Já mando Ollie com firmeza</span>
+        <span class="font-body text-[12px] text-[#d5c4ab]">Quero aprender transição em bowl, mini-rampa, grinds e combos</span>
+      </div>
+    </label>
+
+    <!-- High-Contrast Mechanical Button -->
+    <div class="mt-4 pt-2">
+      <%= f.button type: :submit, class: "w-full group relative bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_4px_0_#6b4c00] active:translate-y-[3px] active:shadow-none transition-all duration-75 ease-out flex items-center justify-center gap-2 cursor-pointer" do %>
+        <span>Avançar</span>
+        <span class="material-symbols-outlined text-[24px] font-bold">arrow_forward</span>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>

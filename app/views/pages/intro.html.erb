@@ -1,16 +1,32 @@
 <% content_for :section, "Abertura" %>
 
-<section class="flex w-full min-h-[70dvh] max-w-[36rem] flex-col justify-center">
-  <h2 class="font-display text-display-lg text-on-surface">Do zero ao primeiro combo.</h2>
-  <p class="mt-xs font-display text-headline-md text-on-surface-variant">Sem plateia.</p>
+<section class="flex flex-col w-full min-h-[75dvh] max-w-[480px] mx-auto justify-center items-center px-4 py-8 relative overflow-hidden">
+  <!-- Double Contrast Street Container with Official Logo -->
+  <div class="relative w-full max-w-[260px] aspect-square mb-8">
+    <div class="w-full h-full bg-gradient-to-br from-[#1f1f23] to-[#0d0e11] rounded-2xl flex items-center justify-center p-6 border border-[#343538] shadow-[8px_8px_0_#FFB800] -rotate-2">
+      <%= image_tag "stance_logo_oficial.svg", alt: "STANCE Logo", class: "w-full h-auto drop-shadow-[0_8px_0_#6b4c00]" %>
+    </div>
+    <div class="absolute -top-3 -right-3 bg-[#fd591e] text-black px-3 py-1 font-display text-[12px] font-black uppercase rotate-6 shadow-[2px_2px_0_#121316] border border-black" style="clip-path: polygon(2% 0%, 98% 3%, 100% 95%, 0% 100%);">
+      BETA
+    </div>
+  </div>
 
-  <%= link_to onboarding_age_gate_path, class: "btn-primary mt-lg" do %>
-    Descobrir meu nível
-    <span class="material-symbols-outlined">arrow_forward</span>
+  <!-- Headline: "Do zero ao primeiro combo." (Sem o 'Sem plateia', conforme anotação pág 22) -->
+  <div class="flex flex-col items-center text-center gap-2 mb-8">
+    <h1 class="font-display text-[32px] sm:text-[36px] font-black text-[#e3e2e6] uppercase leading-tight tracking-tight max-w-[320px]">
+      Do zero ao<br><span class="text-[#ffb800]">primeiro combo.</span>
+    </h1>
+  </div>
+
+  <!-- High-Contrast Yellow Mechanical Button -->
+  <%= link_to onboarding_age_gate_path, class: "w-full max-w-[320px] group relative bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_6px_0_#6b4c00] active:shadow-[0_0px_0_#6b4c00] active:translate-y-[6px] transition-all duration-75 ease-out flex items-center justify-between no-underline" do %>
+    <span>Descobrir meu nível</span>
+    <span class="material-symbols-outlined text-[28px] font-bold group-active:translate-x-1 transition-transform">arrow_forward</span>
   <% end %>
 
-  <p class="mt-md flex items-center justify-center gap-xs text-body-md text-on-surface-variant/70">
-    <span class="material-symbols-outlined text-[18px]">lock</span>
-    Privado por padrão. Ninguém vê o seu treino.
-  </p>
+  <!-- Privacy Footer -->
+  <div class="w-full mt-8 flex items-center justify-center gap-1.5 text-[#d5c4ab]/80">
+    <span class="material-symbols-outlined text-[16px]">lock</span>
+    <span class="font-body text-[12px] tracking-wide">Privado por padrão. Ninguém vê o seu treino.</span>
+  </div>
 </section>

@@ -1,64 +1,137 @@
-<% content_for :section, "Agenda" %>
+<% content_for :section, "Compromisso" %>
 
-<% if @first_commitment %>
-  <h2 class="font-display text-headline-md">Quando e onde você vai fazer sua primeira sessão?</h2>
-  <p class="mt-xs text-body-md text-on-surface-variant">
-    Escolha um local plano, vazio e sem ninguém te olhando. Uma garagem ou ciclovia
-    vazia às 7h da manhã funcionam muito bem.
-  </p>
-<% else %>
-  <h2 class="font-display text-headline-md">Quando será o seu próximo rolê?</h2>
-  <p class="mt-xs text-body-md text-on-surface-variant">
-    Recomendamos treinar 1 vez por semana. O skate exige tempo de descanso para os
-    joelhos e corpo.
-  </p>
-<% end %>
+<div class="flex flex-col w-full max-w-[480px] mx-auto px-4 py-2 gap-5 pb-24 relative">
+  <!-- Title Section with Properly Sized Tape Badge -->
+  <div class="relative pt-2">
+    <div class="inline-block bg-[#fd591e] text-black px-2.5 py-0.5 font-display text-[10px] font-black uppercase rotate-[-2deg] shadow-[2px_2px_0_#121316] border border-black mb-2">
+      Compromisso
+    </div>
+    <h1 class="font-display text-[28px] sm:text-[32px] font-black uppercase text-[#e3e2e6] leading-tight tracking-tight">
+      Quando e onde você vai fazer sua primeira sessão?
+    </h1>
+  </div>
 
-<%= render "shared/errors", record: @training_session %>
-
-<%= form_with model: @training_session, url: schedules_path, class: "mt-md space-y-md" do |f| %>
-  <%= hidden_field_tag :maneuver_slug, @maneuver&.slug %>
-
-  <div>
-    <span class="mb-xs block font-body text-label-caps uppercase tracking-widest text-on-surface-variant">
-      Dia da semana
-    </span>
-    <div class="flex gap-xs overflow-x-auto pb-xs">
-      <% (0..6).each do |offset| %>
-        <% date = Date.current + offset %>
-        <label class="min-w-[64px] shrink-0 cursor-pointer rounded-lg border border-surface-container-high
-                      bg-surface-container p-xs text-center has-[:checked]:border-primary has-[:checked]:bg-surface-container-high">
-          <%= f.radio_button :scheduled_on, date.to_s, class: "sr-only",
-                checked: @training_session.scheduled_on == date %>
-          <span class="block text-label-caps uppercase text-on-surface-variant"><%= I18n.l(date, format: "%a") %></span>
-          <span class="block font-display text-headline-md text-on-surface"><%= date.day %></span>
-        </label>
-      <% end %>
+  <!-- O Pico Perfeito Visual Banner -->
+  <div class="relative h-32 rounded-lg overflow-hidden border border-[#343538] shadow-[4px_4px_0_#121316]">
+    <%= image_tag "skate_spot_perfect.jpg", alt: "Pico Perfeito", class: "w-full h-full object-cover" %>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#121316]/95 via-[#121316]/40 to-transparent flex flex-col justify-end p-3">
+      <div class="flex items-center gap-1.5 text-[#ffb800] font-display text-[12px] font-black uppercase">
+        <span class="material-symbols-outlined text-[16px]">verified</span>
+        <span>O Pico Perfeito</span>
+      </div>
+      <p class="font-body text-[11px] text-[#d5c4ab] leading-snug">
+        Piso plano, liso e sem plateia. Garagens e quadras entre 7h e 10h da manhã.
+      </p>
     </div>
   </div>
 
-  <div>
-    <span class="mb-xs block font-body text-label-caps uppercase tracking-widest text-on-surface-variant">
-      Período
-    </span>
-    <div class="grid grid-cols-1 gap-xs sm:grid-cols-3">
-      <% [ [ "morning", "light_mode", "Manhã" ], [ "afternoon", "routine", "Tarde" ], [ "night", "dark_mode", "Noite" ] ].each do |value, icon, label| %>
-        <label class="cursor-pointer rounded-lg border border-surface-container-high bg-surface-container p-xs
-                      text-center has-[:checked]:border-primary">
-          <%= f.radio_button :period, value, class: "sr-only", checked: @training_session.period == value %>
-          <span class="material-symbols-outlined text-primary"><%= icon %></span>
-          <span class="mt-1 block text-label-caps uppercase text-on-surface-variant"><%= label %></span>
+  <%= form_with model: @training_session, url: schedules_path, class: "flex flex-col gap-5" do |f| %>
+    <%= hidden_field_tag :maneuver_slug, @maneuver&.slug %>
+
+    <!-- 1. Dia do Drop (Multi-seleção com rotações alternadas) -->
+    <div class="flex flex-col gap-2">
+      <span class="font-display text-[14px] font-black text-[#e3e2e6] uppercase tracking-wider flex justify-between items-center">
+        <span>Dias do Drop</span>
+        <span class="font-body text-[11px] text-[#ffb800] lowercase font-normal">escolha 1 ou mais</span>
+      </span>
+
+      <div class="grid grid-cols-7 gap-1.5" id="drop-days-selector">
+        <% [
+             ["Dom", "D", "-rotate-2", false],
+             ["Seg", "S", "rotate-2", false],
+             ["Ter", "T", "-rotate-1", false],
+             ["Qua", "Q", "rotate-3", false],
+             ["Qui", "Q", "-rotate-2", true],
+             ["Sex", "S", "rotate-1", false],
+             ["Sáb", "S", "-rotate-3", true]
+           ].each_with_index do |(dia_nome, dia_letra, rot, checked), idx| %>
+          <label class="cursor-pointer flex flex-col items-center justify-center p-2 rounded bg-[#1f1f23] border border-[#343538] has-[:checked]:bg-[#ffb800] has-[:checked]:text-black has-[:checked]:border-[#ffb800] has-[:checked]:shadow-[2px_2px_0_#6b4c00] transition-all <%= rot %>">
+            <input type="checkbox" name="training_days[]" value="<%= dia_nome %>" class="sr-only" <%= "checked" if checked %>>
+            <span class="font-body text-[10px] uppercase font-bold text-inherit opacity-75"><%= dia_nome %></span>
+            <span class="font-display text-[16px] font-black text-inherit leading-tight"><%= dia_letra %></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 2. Duração do Treino (Substituindo o horário fixo) -->
+    <div class="flex flex-col gap-2">
+      <span class="font-display text-[14px] font-black text-[#e3e2e6] uppercase tracking-wider flex justify-between items-center">
+        <span>Tempo por Sessão</span>
+        <span class="font-body text-[11px] text-[#30D158] font-bold">sugerido para seu nível</span>
+      </span>
+
+      <div class="grid grid-cols-2 gap-2">
+        <label class="cursor-pointer p-3 rounded-lg bg-[#1f1f23] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] flex items-center justify-between transition-all">
+          <div class="flex flex-col">
+            <span class="font-body text-[14px] font-bold text-[#e3e2e6]">15 Minutos</span>
+            <span class="font-body text-[11px] text-[#9e8f78]">Rápido & Focado</span>
+          </div>
+          <input type="radio" name="session_duration" value="15" class="accent-[#ffb800]">
         </label>
+
+        <label class="cursor-pointer p-3 rounded-lg bg-[#1f1f23] border-2 border-[#ffb800] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] flex items-center justify-between shadow-[0_0_12px_rgba(255,184,0,0.15)] transition-all">
+          <div class="flex flex-col">
+            <span class="font-body text-[14px] font-bold text-[#e3e2e6]">30 Minutos</span>
+            <span class="font-body text-[11px] text-[#ffb800] font-bold">⭐ Recomendado</span>
+          </div>
+          <input type="radio" name="session_duration" value="30" class="accent-[#ffb800]" checked>
+        </label>
+
+        <label class="cursor-pointer p-3 rounded-lg bg-[#1f1f23] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] flex items-center justify-between transition-all">
+          <div class="flex flex-col">
+            <span class="font-body text-[14px] font-bold text-[#e3e2e6]">45 Minutos</span>
+            <span class="font-body text-[11px] text-[#9e8f78]">Sessão Completa</span>
+          </div>
+          <input type="radio" name="session_duration" value="45" class="accent-[#ffb800]">
+        </label>
+
+        <label class="cursor-pointer p-3 rounded-lg bg-[#1f1f23] border border-[#343538] has-[:checked]:border-2 has-[:checked]:border-[#ffb800] has-[:checked]:bg-[#24252a] flex items-center justify-between transition-all">
+          <div class="flex flex-col">
+            <span class="font-body text-[14px] font-bold text-[#e3e2e6]">60+ Minutos</span>
+            <span class="font-body text-[11px] text-[#9e8f78]">Fissurado</span>
+          </div>
+          <input type="radio" name="session_duration" value="60" class="accent-[#ffb800]">
+        </label>
+      </div>
+    </div>
+
+    <!-- 3. Onde Treinar (Multi-Local & Spot Finder) -->
+    <div class="flex flex-col gap-2">
+      <span class="font-display text-[14px] font-black text-[#e3e2e6] uppercase tracking-wider">
+        Onde você vai dropar?
+      </span>
+
+      <div class="relative">
+        <div class="flex items-center bg-[#0d0e11] border border-[#343538] rounded-lg px-3 py-2.5 shadow-[inner_0_2px_4px_rgba(0,0,0,0.5)] focus-within:border-[#ffb800]">
+          <span class="material-symbols-outlined text-[#ffb800] text-[20px] mr-2">location_on</span>
+          <%= f.text_field :location_name, class: "w-full bg-transparent font-body text-[14px] text-[#e3e2e6] focus:outline-none placeholder-[#514532]", placeholder: "Ex: Garagem do prédio, quadra vazia..." %>
+        </div>
+      </div>
+
+      <!-- Quick Spot Suggestions (Picos Recomendados) -->
+      <div class="flex flex-col gap-2 mt-1">
+        <span class="font-body text-[11px] text-[#9e8f78] uppercase font-bold">Sugestões de Spots Lisos:</span>
+        <div class="flex flex-wrap gap-1.5">
+          <button type="button" onclick="document.querySelector('#training_session_location_name').value='Quadra de Futsal do Bairro (Piso Liso)'" class="bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] px-2.5 py-1 rounded text-[11px] text-[#e3e2e6] font-body">
+            🏢 Garagem do Prédio
+          </button>
+          <button type="button" onclick="document.querySelector('#training_session_location_name').value='Quadra Poliesportiva (Vazia cedo)'" class="bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] px-2.5 py-1 rounded text-[11px] text-[#e3e2e6] font-body">
+            🏀 Quadra Poliesportiva
+          </button>
+          <button type="button" onclick="document.querySelector('#training_session_location_name').value='Ciclovia Larga / Asfalto Novo'" class="bg-[#1f1f23] hover:bg-[#292a2d] border border-[#343538] px-2.5 py-1 rounded text-[11px] text-[#e3e2e6] font-body">
+            🛣️ Ciclovia Asfalto Liso
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Button (High Contrast Mechanical) -->
+    <div class="mt-2 pt-2">
+      <%= f.button type: :submit, class: "w-full group relative bg-[#ffb800] text-black font-display text-[18px] font-black uppercase py-4 px-6 border border-[#2E3038] shadow-[0_4px_0_#6b4c00] active:translate-y-[3px] active:shadow-none transition-all duration-75 ease-out flex items-center justify-between no-underline cursor-pointer" do %>
+        <span>Salvar Compromisso & Ver Drill</span>
+        <span class="material-symbols-outlined text-[24px] font-bold group-active:translate-x-1 transition-transform">arrow_forward</span>
       <% end %>
     </div>
-  </div>
-
-  <div>
-    <%= f.label :location_name, "Localização",
-          class: "mb-xs block font-body text-label-caps uppercase tracking-widest text-on-surface-variant" %>
-    <%= f.text_field :location_name, class: "field", placeholder: "Garagem de casa, ciclovia vazia..." %>
-  </div>
-
-  <%= f.button (@first_commitment ? "Salvar meu compromisso de treino" : "Confirmar agendamento"),
-        type: :submit, class: "btn-primary" %>
-<% end %>
+  <% end %>
+</div>

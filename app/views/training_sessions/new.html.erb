@@ -1,45 +1,56 @@
-<% content_for :section, "Segurança" %>
+<% content_for :section, "Modo Treino" %>
 
-<div class="mb-md flex items-center gap-xs" data-controller="connection">
-  <span class="material-symbols-outlined text-on-surface-variant" data-connection-target="icon">wifi</span>
-  <span class="text-label-caps uppercase tracking-widest text-on-surface-variant"
-        data-connection-target="label">Online</span>
-</div>
+<div class="flex flex-col w-full gap-md">
+  <div class="flex items-center justify-between">
+    <span class="tape-badge" style="background: #ffb800; color: black;">⚡ MODO TREINO OFFLINE</span>
+  </div>
 
-<span class="material-symbols-outlined icon-filled text-[40px] text-primary">skateboarding</span>
-<h2 class="mt-xs font-display text-display-lg">Checklist de segurança</h2>
-<p class="mt-xs text-body-md text-on-surface-variant">
-  Confirme as condições da pista antes de iniciar a gravação.
-</p>
+  <div class="flex flex-col gap-xs">
+    <h1 class="screen-title">Checklist Pré-Sessão</h1>
+    <p class="screen-desc">Confirme os pontos de segurança antes de subir no skate para garantir um treino seguro.</p>
+  </div>
 
-<%= render "shared/errors", record: @training_session %>
+  <%= form_with model: @training_session,
+        url: maneuver_training_sessions_path(@maneuver),
+        data: { controller: "checklist" },
+        class: "flex flex-col gap-sm" do |f| %>
 
-<%= form_with model: @training_session,
-      url: maneuver_training_sessions_path(@maneuver),
-      data: { controller: "checklist" },
-      class: "mt-md space-y-xs" do |f| %>
-
-  <% {
-       gear_checked: "Capacete e joelheira estão firmes?",
-       ground_clear: "O chão está plano e livre de pedras?",
-       space_safe:   "Tem espaço seguro ao redor?"
-     }.each do |attribute, question| %>
-    <label class="card flex cursor-pointer items-center justify-between gap-sm has-[:checked]:border-primary">
-      <span class="text-body-md text-on-surface"><%= question %></span>
-      <%= f.check_box attribute, class: "h-5 w-5 accent-[#ffb800]",
-            data: { checklist_target: "item", action: "checklist#refresh" } %>
+    <label class="check-item done" onclick="this.classList.toggle('done')">
+      <div class="check-box-square">
+        <span class="material-symbols-outlined text-[16px]">check</span>
+      </div>
+      <span class="check-text text-[12px] font-bold text-on-surface">Capacete e joelheiras estão bem firmes?</span>
+      <%= f.check_box :gear_checked, checked: true, class: "sr-only" %>
     </label>
-  <% end %>
 
-  <%= f.button type: :submit, class: "btn-primary mt-md",
-        disabled: true, data: { checklist_target: "submit" } do %>
-    <span class="material-symbols-outlined">lock</span>
-    <span data-checklist-target="label">Complete o checklist</span>
-  <% end %>
-<% end %>
+    <label class="check-item done" onclick="this.classList.toggle('done')">
+      <div class="check-box-square">
+        <span class="material-symbols-outlined text-[16px]">check</span>
+      </div>
+      <span class="check-text text-[12px] font-bold text-on-surface">O chão está plano e livre de pedrinhas?</span>
+      <%= f.check_box :ground_clear, checked: true, class: "sr-only" %>
+    </label>
 
-<%= link_to new_support_request_path(kind: :injury),
-      class: "mt-md flex items-center justify-center gap-xs text-body-md text-on-surface-variant/70" do %>
-  <span class="material-symbols-outlined text-[18px]">medical_services</span>
-  Se machucou ou travou? Fale com a gente.
-<% end %>
+    <label class="check-item" onclick="this.classList.toggle('done')">
+      <div class="check-box-square">
+        <span class="material-symbols-outlined text-[16px]">check</span>
+      </div>
+      <span class="check-text text-[12px] font-bold text-on-surface">Ambiente seguro e livre de perigos ao redor?</span>
+      <%= f.check_box :space_safe, class: "sr-only" %>
+    </label>
+
+    <div class="flex flex-col gap-sm mt-md">
+      <button type="submit" class="tactile-btn-primary" style="background: #ff5a5f; color: black; box-shadow: 0 4px 0 #690005;">
+        <span class="material-symbols-outlined text-[24px]">videocam</span>
+        <span>Gravar 15s de Vídeo Direto</span>
+      </button>
+
+      <button type="submit" class="tactile-btn-primary" style="background: #1f1f23; color: #e3e2e6; box-shadow: 0 4px 0 #121316;">
+        <span class="material-symbols-outlined text-[24px]">folder</span>
+        <span>Subir Vídeo da Galeria</span>
+      </button>
+
+      <%= link_to "Registrar sem enviar vídeo", maneuver_path(@maneuver), class: "secondary-link-btn mt-xs" %>
+    </div>
+  <% end %>
+</div>

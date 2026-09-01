@@ -1,28 +1,45 @@
-<span class="chip">Passo <%= maneuver.code %> · Aprenda a cair</span>
-<h2 class="mt-xs font-display text-display-lg"><%= maneuver.name.titleize %></h2>
+<div class="flex flex-col gap-xs mb-xs">
+  <span class="step-indicator">PASSO <%= maneuver.code %> · BASE & SEGURANÇA</span>
+  <h1 class="screen-title"><%= maneuver.name.titleize %></h1>
+</div>
 
-<div class="mt-md aspect-video w-full overflow-hidden rounded-xl border border-surface-container-high bg-surface-container-lowest">
+<!-- Slow-Motion Video Player -->
+<div class="video-container">
   <% if maneuver.video_url.present? %>
-    <video class="h-full w-full object-cover" controls preload="metadata" src="<%= maneuver.video_url %>"></video>
+    <video class="w-full h-full object-cover" controls preload="metadata" src="<%= maneuver.video_url %>"></video>
   <% else %>
-    <div class="flex h-full items-center justify-center text-on-surface-variant/50">
-      <span class="material-symbols-outlined text-[40px]">play_arrow</span>
+    <%= image_tag "skater_hero.jpg", alt: "Demonstração", class: "w-full h-full object-cover opacity-60" %>
+    <div class="play-circle" onclick="this.parentElement.querySelector('video') ? this.parentElement.querySelector('video').play() : null">
+      <span class="material-symbols-outlined text-[32px] text-black">play_arrow</span>
     </div>
+  <% end %>
+  <div class="video-badge">CÂMERA LENTA · 15 SEG</div>
+</div>
+
+<!-- Por que agora? -->
+<div class="sub-headline-card" style="border-left: 4px solid #ffb800; transform: none; background: #1a1b20; padding: 10px; margin-bottom: 10px;">
+  <span style="font-size: 11px; font-weight: 800; color: #ffb800; text-transform: uppercase; display: block; margin-bottom: 2px;">💡 Por que agora?</span>
+  <p style="font-size: 11px; color: #d5c4ab; line-height: 1.35;">
+    Aprender a cair rolando de lado tira 90% do medo de subir no skate e previne fraturas no punho.
+  </p>
+</div>
+
+<!-- Instruções em 3 Passos -->
+<div class="instructions-card" style="margin-bottom: 12px;">
+  <% if maneuver.instruction_steps.any? %>
+    <% maneuver.instruction_steps.each do |step| %>
+      <p><strong><%= step.position %>.</strong> <%= step.body %></p>
+    <% end %>
+  <% else %>
+    <p><strong>1.</strong> Flexione os joelhos e aproxime o tronco do chão.</p>
+    <p><strong>2.</strong> Role com as costas e ombro absorvendo o impacto.</p>
+    <p style="color: #ff5a5f;"><strong>3.</strong> <strong style="text-decoration: underline;">Nunca</strong> estique a mão espalmada para travar a queda.</p>
   <% end %>
 </div>
 
-<h3 class="mt-md font-display text-headline-md">Instruções</h3>
-<ol class="mt-xs space-y-xs">
-  <% maneuver.instruction_steps.each do |step| %>
-    <li class="card flex gap-sm">
-      <span class="font-display text-headline-md text-primary"><%= format("%02d", step.position) %></span>
-      <span class="text-body-md text-on-surface-variant"><%= step.body %></span>
-    </li>
-  <% end %>
-</ol>
-
 <% unless locked %>
-  <%= link_to new_maneuver_training_session_path(maneuver), class: "btn-primary mt-md" do %>
-    Fazer o drill <span class="material-symbols-outlined">arrow_forward</span>
+  <%= link_to new_maneuver_training_session_path(maneuver), class: "tactile-btn-primary" do %>
+    <span>Praticar este Passo</span>
+    <span class="material-symbols-outlined">arrow_forward</span>
   <% end %>
 <% end %>

@@ -28,5 +28,7 @@
       <%= render "shared/anonymous_banner" if anonymous_profile? && current_user.onboarded? %>
       <%= yield %>
     </main>
+
+    <%= render "shared/bottom_nav" unless content_for?(:hide_nav) %>
   </body>
 </html>
